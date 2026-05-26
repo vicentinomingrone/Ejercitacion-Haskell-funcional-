@@ -1,4 +1,5 @@
 import Foreign.C (eDEADLK)
+import GHC.RTS.Flags (RTSFlags(parFlags))
 noMeImportaElPrimero :: (Num a, Num b) => a -> b -> b
 noMeImportaElPrimero numero1 numero2 = numero2 
 
@@ -249,6 +250,137 @@ remera = UnProducto {
 
 -- 1) Definí miLength, que recibe una lista y devuelve su cantidad de elementos. Usá recursividad y pattern matching.
 
-miLength :: Num a => [a] -> a 
+miLength :: Num a => [a] -> Int
 miLength [] = 0 
 miLength (_:xs) = 1 + miLength xs
+
+
+-- 2) Definí miSum, que recibe una lista de números y devuelve la suma.
+
+miSum :: Num a => [a] -> a
+miSum [] = 0
+miSum (x:xs) = x + miSum xs   
+
+-- 3) Definí miProduct, que recibe una lista de números y devuelve el producto.
+
+miProduct :: Num a => [a] -> a 
+miProduct [] = 1
+miProduct (x:xs) = x * miProduct xs
+
+-- 4) Definí primerosNaturales, que sea una lista infinita desde 1 en adelante.
+
+primerosNaturales :: [Int] 
+primerosNaturales = [1..]  
+
+-- 5) Definí muchosDe, que recibe un valor y devuelve una lista infinita con ese valor repetido.
+
+muchosDe :: a -> [a]
+muchosDe valor = valor : muchosDe valor  
+
+-- 6) Definí miElem, que recibe un valor y una lista, y devuelve True si el valor está en la lista.
+
+miElem :: Eq a => a -> [a] -> Bool
+miElem valor [] = False 
+miElem valor (x:xs) = valor == x || miElem valor xs
+
+-- 7) Definí miTake, que recibe un número n y una lista, y devuelve los primeros n elementos.
+
+miTake :: Int -> [a] -> [a]
+miTake 0 _ = []
+miTake _ [] = []
+miTake n (x:xs) = x : miTake (n - 1) xs
+
+-- 8) Definí miDrop, que recibe un número n y una lista, y devuelve la lista sin los primeros n elementos.
+
+
+
+-- MODULO 5 
+
+-- 1) Definí dobles, que recibe una lista de números y devuelve una lista con todos duplicados. Usa MAP. 
+
+dobles :: Num a =>  [a] -> [a]
+dobles lista = map (*2) lista 
+
+-- 2) Definí mayoresA10, que recibe una lista de números y devuelve solo los mayores a 10. Usá filter.
+
+mayoresA10 :: (Num a, Ord a) => [a] -> [a]
+mayoresA10 lista = filter (> 10) lista 
+
+
+-- 3) Definí hayAlgunPar, que recibe una lista de números y devuelve True si algún número es par. Usa any 
+
+hayAlgunPar :: [Int] -> Bool
+hayAlgunPar = any even 
+
+-- 4) Definí todosPositivos, que recibe una lista de números y devuelve True si todos son mayores a 0. usa all 
+
+todosPositivos :: [Int] -> Bool
+todosPositivos = all (>0)
+
+
+-- 5) Definí sumarTodos, que recibe una lista de números y devuelve la suma total. usa Foldl 
+
+sumarTodos :: [Int] -> Int 
+sumarTodos = foldl (+) 0 
+
+-- 6) Definí largosDePalabras, que recibe una lista de palabras y devuelve una lista con el largo de cada una. Usa Map 
+
+largosDePalabras :: [String] -> [Int]
+largosDePalabras = map length 
+
+-- 7) Definí palabrasLargas, que recibe una lista de palabras y devuelve solo las que tienen más de 5 letras. Usa Filter 
+
+palabrasLargas :: [String] -> [String]
+palabrasLargas = filter ((>5) .length)
+ 
+-- 8) Definí hayPalabraVacia, que recibe una lista de palabras y devuelve True si alguna palabra está vacía. Usa Any 
+
+hayPalabrasVacia :: [String] -> Bool
+hayPalabrasVacia = any ((==0).length)
+
+-- 9) Definí todasLargas, que recibe una lista de palabras y devuelve True si todas tienen más de 3 letras. Usa all 
+
+todasLargas :: [String] -> Bool 
+todasLargas = all ((>3).length)
+
+-- 10) Definí multiplicarTodos, que recibe una lista de números y devuelve el producto total.
+
+multiplicarTodos :: [Int] -> Int 
+multiplicarTodos = foldl (*) 1
+
+-- MODULO 6 
+
+-- 1) Definí doblesLambda, que recibe una lista de números y devuelve todos duplicados. usa Map con lamda 
+
+doblesLambda :: [Int] -> [Int]
+doblesLambda lista = map (\x -> x*2) lista 
+
+
+-- 2) Definí mayoresA10Lambda, que recibe una lista de números y devuelve solo los mayores a 10. Usa Filter 
+
+mayoresA10Lambda :: [Int] -> [Int]
+mayoresA10Lambda = filter (\x-> x>10) 
+
+
+-- 3) Definí sumasDePares, que recibe una lista de tuplas de dos números y devuelve una lista con la suma de cada tupla. Usa map
+
+sumasDePares :: [(Int, Int)] -> [Int]
+sumasDePares = map (\(a,b) -> a + b)
+
+
+-- 4) Definí palabrasConMasDe5, que recibe una lista de palabras y devuelve las que tienen más de 5 letras. Usa filter 
+
+palabrasConMasDe5 :: [String] -> [String]
+palabrasConMasDe5 = filter ((\x -> x>5). length) 
+
+-- 5) Definí sumarConLambda, que recibe una lista de números y devuelve la suma total. Usa Foldl  
+
+sumarConLambda :: [Int] -> Int
+sumarConLambda = foldl (\acum x -> acum + x) 0 
+
+-- 6) Definí triplesLambda, que recibe una lista de números y devuelve todos triplicados.
+
+triplesLambda :: [Int] -> [Int]
+triplesLambda = map (\x -> x*3)
+
+-- 7) Definí paresLambda, que recibe una lista de números y devuelve solo los pares. Usá filter con lambda.
