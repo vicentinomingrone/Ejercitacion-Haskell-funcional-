@@ -384,3 +384,22 @@ triplesLambda :: [Int] -> [Int]
 triplesLambda = map (\x -> x*3)
 
 -- 7) Definí paresLambda, que recibe una lista de números y devuelve solo los pares. Usá filter con lambda.
+
+paresLambda :: [Int] -> [Int]
+paresLambda = filter (\x -> even x) 
+
+ 
+-- 8) Definí nombresDePersonas, que recibe una lista de tuplas (String, Int) y devuelve una lista con solo los nombres. Usá map con lambda.
+
+nombresDePersonas :: [(String, Int)] -> [String]
+nombresDePersonas = map (\x -> fst x) 
+
+-- 9) Definí mayoresDeEdadLambda, que recibe una lista de tuplas (String, Int) y devuelve solo las personas que tienen 18 años o más. Usá filter con lambda.
+
+mayoresDeEdadLambda ::  [(String, Int)] -> [(String, Int)]
+mayoresDeEdadLambda = filter (\x -> snd x >= 18)
+
+-- 10) Definí productoConLambda, que recibe una lista de números y devuelve el producto total. Usa fold con lambda.
+
+productConLambda :: [Int] -> Int
+productConLambda = foldl (\acum x -> acum * x) 1
