@@ -102,3 +102,50 @@ esDesaprobado nota = nota < 6
 
 esDesaprobado :: (Num a, Ord a) => a -> Bool 
 esDesaprobado nota = nota < 6  
+
+-- Segunda Vuelta : 
+
+--1) defini esMayorDeEdad :: Persona -> Bool Dado el dominio de abajo. Tiene que devolver True si la persona tiene 18 años o más. Condición: usá composición y aplicación parcial.
+
+
+type Nombre = String
+type Edad = Int
+
+data Persona = UnaPersona {
+  nombrePersona :: Nombre,
+  edadPersona :: Edad
+} deriving Show
+
+
+esMayorDeEdad :: Persona -> Bool 
+esMayorDeEdad  = (>= 18). edadPersona
+
+--2) defini: nombreLargo :: Persona -> Bool | Una persona tiene nombre largo si su nombre tiene más de 6 letras.
+
+nombreLargo :: Persona -> Bool 
+nombreLargo =  (>6).length.nombrePersona
+
+-- 3) presentacion :: Persona -> String definilo. 
+
+presentacion :: Persona -> String 
+presentacion persona = nombrePersona persona  ++ " tiene " ++ show (edadPersona persona) ++" anios"
+
+--4) 
+
+categoriaEdad :: Persona -> String
+categoriaEdad persona
+  | edadPersona persona < 13 = "ninez"
+  | edadPersona persona <= 17 = "Adolecente"
+  | otherwise = "Adultez"
+
+
+
+
+--5 ) f persona = length (nombrePersona persona) > 6 && edadPersona persona >= 18 
+
+{-
+esta funcion lo que hace es esperar una persona y te devuelve true si la persona es mayor o igual a 18 años y ademas si el nombre de la persona tiene mas de 6 letras. 
+para mi no tiene problemas de Expresividad ni de declaactividad, se lee y entiende bastante bien, podrias quizas usar condiciones una condicion esta si la cumple ponerle true 
+y si no la cumple false, no podrias usar guardadas dado que necesitamos un valor bool y la gusrdas no son para ello 
+-}
+
