@@ -1,4 +1,6 @@
-type Palabra = String
+{-
+
+ type Palabra = String
 type Verso = String
 type Estrofa = [Verso]
 type Artista = String
@@ -74,3 +76,4 @@ conRima =
 anadiplosis :: Conjugacion
 anadiplosis verso1 verso2 =
   ultimaPalabra verso1 == primeraPalabra verso2
+  -}
