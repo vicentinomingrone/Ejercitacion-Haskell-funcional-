@@ -150,3 +150,25 @@ puestaBase artista estrofa =
 aumentarPotencia :: Float -> PuestaEnEscena -> PuestaEnEscena 
 aumentarPotencia factor puesta = 
   puesta { potencia = potencia puesta * (1 + factor)}
+
+
+exaltarPublico :: Bool -> PuestaEnEscena -> PuestaEnEscena
+exaltarPublico exaltado puesta = puesta {publicoExaltado = exaltado}
+ 
+exaltarPublicoSiCumple :: Patron -> PuestaEnEscena -> PuestaEnEscena
+exaltarPublicoSiCumple patron puesta =
+ exaltarPublico (cumplePatron puesta patron) puesta
+ 
+cumplePatron :: PuestaEnEscena -> Patron -> Bool
+cumplePatron puesta patron = patron (freestyle puesta)
+ 
+type Estilo = PuestaEnEscena -> PuestaEnEscena
+ 
+gritar :: Estilo
+gritar = aumentarPotencia 0.5
+ 
+respuesta :: Bool -> Estilo
+respuesta efectiva = exaltarPublico efectiva . aumentarPotencia 0.2
+ 
+tirarSkills :: Patron -> Estilo
+tirarSkills patron = exaltarPublicoSiCumple patron . aumentarPotencia 0.1

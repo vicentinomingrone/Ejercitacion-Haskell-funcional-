@@ -1,3 +1,4 @@
+import Main (sonIguales)
 type Marca = String
 type Modelo = String
 type Piloto = String
@@ -70,8 +71,13 @@ simple (posicion1, posicion2) secuencia =
 -- 7. Anáfora de maniobras
 
 
+sonIguales :: [String] -> Bool 
+sonIguales [] = False 
+sonIguales (palabra:palabras) = 
+    all (== palabra) palabras
 
 anafora :: Patron
-anafora = all (map primeraPalabra)
+anafora = 
+    sonIguales . map primeraPalabra
 
-sonIguales :: [String] -> Bool 
+
