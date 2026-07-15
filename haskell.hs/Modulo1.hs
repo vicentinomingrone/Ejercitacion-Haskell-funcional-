@@ -1,5 +1,6 @@
 import Foreign.C (eDEADLK)
 import GHC.RTS.Flags (RTSFlags(parFlags))
+import Graphics.Win32 (eS_PASSWORD)
 noMeImportaElPrimero :: (Num a, Num b) => a -> b -> b
 noMeImportaElPrimero numero1 numero2 = numero2 
 
@@ -148,4 +149,5 @@ esta funcion lo que hace es esperar una persona y te devuelve true si la persona
 para mi no tiene problemas de Expresividad ni de declaactividad, se lee y entiende bastante bien, podrias quizas usar condiciones una condicion esta si la cumple ponerle true 
 y si no la cumple false, no podrias usar guardadas dado que necesitamos un valor bool y la gusrdas no son para ello 
 -}
+
 
