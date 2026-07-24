@@ -115,3 +115,12 @@ nombresDeExperimentados grupo =
 
 experimentado :: Entrenador -> Bool 
 experimentado = (> 700) . experiencia
+
+todosTienenMedallas :: Grupo -> Bool
+todosTienenMedallas = all tieneMedallas
+
+hayAlgunSabio :: Grupo -> Bool 
+hayAlgunSabio = any esSabio 
+
+esSabio :: Entrenador -> Bool 
+esSabio = (>= 2) . length . frasesMotivadoras
