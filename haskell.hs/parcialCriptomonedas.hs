@@ -101,3 +101,48 @@ inversionDiversificada inversion =
 tieneDosOMasEstrategias :: Inversion -> Bool 
 tieneDosOMasEstrategias inversion =
      length  (estrategias inversion) >= 2
+
+
+inversionPrincipiante :: Categoria
+inversionPrincipiante inversion =
+    tieneMenosDosEstrategias inversion 
+    && not (estaEnBilleteraFria inversion)
+    && puedeSerRecomendada inversion 
+
+tieneMenosDosEstrategias :: Inversion -> Bool 
+tieneMenosDosEstrategias inversion = 
+    length (estrategias inversion) < 2  
+
+-- Punto 6 
+
+type Cartera = [Inversion]
+
+cantidadDeCategoria :: Categoria -> Cartera -> Int
+cantidadDeCategoria categoria listaDeInversiones =
+    length (filter categoria listaDeInversiones) 
+
+
+carteraPoderosa :: Cartera -> [String]
+carteraPoderosa inversiones =
+    map cripto (filter ((> 1) . cantidad) inversiones)
+
+inversionesEnResguardadasEnFrio :: Cartera -> Bool
+inversionesEnResguardadasEnFrio = all estaEnBilleteraFria
+
+buenasInversiones :: Cartera -> Bool
+buenasInversiones = any tieneDosOMasEstrategias
+
+-- Punto 7 
+
+aplicarMejoras :: [Mejora] -> Inversion -> Inversion
+aplicarMejoras mejoras inversion =
+    foldl aplicarUnaMejora inversion mejoras
+
+aplicarUnaMejora :: Inversion -> Mejora -> Inversion
+aplicarUnaMejora inversion mejora =
+    mejora inversion
+
+cantidadTotalLuegoDeMejoras :: [Mejora] -> Cartera -> Float
+cantidadTotalLuegoDeMejoras mejoras inversiones = 
+    sum (map cantidad (map  (aplicarMejoras mejoras) inversiones))
+
