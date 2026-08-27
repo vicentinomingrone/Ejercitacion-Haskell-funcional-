@@ -1,0 +1,29 @@
+import clase.*
+
+describe "tests de Tom y Jerry" {
+
+  test "la velocidad de Tom depende de su energia" {
+    assert.equals(9, tom.velocidad())
+  }
+
+  test "la velocidad de Jerry depende de su peso" {
+    assert.equals(5, jerry.velocidad())
+  }
+
+  test "la velocidad del robot raton siempre es 8" {
+    assert.equals(8, robotRaton.velocidad())
+  }
+
+  test "Tom puede atrapar a Jerry" {
+    assert.that(tom.atrapa(jerry))
+  }
+
+  test "Tom puede atrapar al robot raton" {
+    assert.that(tom.atrapa(robotRaton))
+  }
+
+  test "Tom puede atrapar a Vito" {
+    assert.notThat(tom.atrapa(bulldogVito))
+  }
+
+}
