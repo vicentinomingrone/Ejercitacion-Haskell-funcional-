@@ -96,4 +96,48 @@ estaDiversificado(Inversor):-
     accion(Ticker2, _, OtroSector, _), 
     Sector \= OtroSector. 
 
+% Parte E
 
+equipoPosible([], []).
+
+equipoPosible([Acciones | Resto], [Acciones | Combo]):-
+    equipoPosible(Resto, Combo). 
+
+equipoPosible([_ | Resto], Combo):-
+    equipoPosible(Resto, Combo).
+
+
+
+equipoValido(Combo):-
+    length(Combo, 3),
+    todasAccionesExisten(Combo),
+    tieneTecnologia(Combo),
+    tieneRiesgoBajo(Combo),
+    noSuperanMil(Combo).
+
+todasAccionesExisten(Combo):-
+    forall(
+        member(Ticker, Combo),
+        accion(Ticker, _, _, _)
+    ).
+
+tieneTecnologia(Combo):-
+    member(Ticker, Combo),
+    accion(Ticker, _, tecnologia, _).
+
+tieneRiesgoBajo(Combo):-
+    member(Ticker, Combo),
+    accion(Ticker, _, Sector, _),
+    riesgoSector(Sector, bajo).
+
+noSuperanMil(Combo):-
+    findall(
+        Precio,
+        (
+            member(Ticker, Combo),
+            accion(Ticker, _, _, Precio)
+        ),
+        Precios
+    ),
+    sum_list(Precios, Total),
+    Total =< 1000.
