@@ -115,7 +115,57 @@ especialidadNecesaria(acv, neurologia).
 
 
 medicoRecomendado(Medico, Paciente):-
+    paciente(Paciente, _, _), 
     diagnostico(Paciente, Problema, _),
     medico(Medico, Especialidad, Experiencia),
     especialidadNecesaria(Problema, Especialidad),
     Experiencia > 5. 
+
+
+% Parte E — Plan de guardia
+
+planDeGuardia(Plan):-
+    findall(Paciente, paciente(Paciente, _, _), Pacientes),
+    planPosible(Pacientes, Plan),
+    planValido(Plan).
+
+planPosible([], []).
+
+planPosible([Paciente | Resto], [Paciente | Plan]):-
+    planPosible(Resto, Plan). 
+
+planPosible([_ | Resto], Plan):-
+    planPosible(Resto, Plan).
+
+planValido(Plan):- 
+    length(Plan, 3),
+    todosSonPacientes(Plan),
+    tienePacienteUrgente(Plan),
+    tienePacienteGrave(Plan),
+    costosNoSuperan(Plan, 900000).
+
+todosSonPacientes(Plan):-
+    forall(
+        member(Paciente, Plan),
+        paciente(Paciente, _, _)
+    ).
+
+tienePacienteUrgente(Plan):-
+    member(Paciente, Plan),
+    pacienteUrgente(Paciente).
+
+tienePacienteGrave(Plan):-
+    member(Paciente, Plan),
+    diagnostico(Paciente, _, grave).
+
+costosNoSuperan(Plan, Cantidad):-
+    findall(
+        Total,
+        (
+            member(Paciente, Plan),
+            costoTotalPaciente(Paciente, Total)
+        ),
+        CostosTotales
+    ),
+    sum_list(CostosTotales, CantidadDeCostos),
+    CantidadDeCostos =< Cantidad.
