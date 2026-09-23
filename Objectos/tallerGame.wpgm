@@ -1,0 +1,8 @@
+import wollok.game.*
+
+object golTrend {
+    var property position = game.origin()
+
+    method image() = "gol.png"
+}
+

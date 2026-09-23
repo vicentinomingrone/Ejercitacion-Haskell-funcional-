@@ -1,0 +1,56 @@
+import Objectos.tallerGame.*
+import taller.*
+
+describe "Tests de los Autos" {
+  test "Hago viajar al golTrend a una distanacia posible" {
+    assert.that(golTrend.puedeViajar(20))
+  }
+
+  test "verificamos si el GolTrend disminuyo su nafta"{
+    golTrend.viajar(20)
+    assert.equals(18, golTrend.combustible())
+  }
+
+  test "Verificamos si el golTrend aumento sus Km"{
+    golTrend.viajar(20)
+    assert.equals(50020, golTrend.kilometros())
+  }
+
+  test "Hago viajar la Raptor a una distanacia posible" {
+    assert.that(fordRaptor.puedeViajar(30))
+  }
+
+  test "verificamos si la Raptor disminuyo su nafta"{
+    fordRaptor.viajar(20)
+    assert.equals(36, fordRaptor.combustible())
+  }
+
+  test "Verificamos si la Raptor aumento sus Km"{
+    fordRaptor.viajar(30)
+    assert.equals(80030, fordRaptor.kilometros())
+  }
+
+  test "Hacemos 20 km con la camioneta y me queda combustible"{
+    fordRaptor.viajar(20)
+    assert.equals(34, fordRaptor.combustible())
+  }
+  test "Hacemos 10 km con el GolTrend, verificamos si el combustible suma"{
+    golTrend.viajar(10)
+    assert.equals(20, golTrend.combustible())
+  }
+
+  test "El golTrend Cmabia su modo de consumo"{
+    golTrend.viajar(10)
+    golTrend.modoConsumo(consumoNormal)
+    golTrend.viajar(10)
+    assert.equals(19, golTrend.combustible())
+  }
+
+  test "El fiat cambia de modo" {
+    fiatCronos.viajar(10)
+    fiatCronos.modoConsumo(consumoEconomico)
+    fiatCronos.viajar(20)
+    assert.equals(100, fiatCronos.combustible())
+  }
+}
+
