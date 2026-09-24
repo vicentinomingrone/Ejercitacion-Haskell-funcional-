@@ -1,0 +1,10 @@
+import estacionamiento.*
+
+describe "Test de el Estacionamiento" {
+    test "Cuantos vehciulos hay en el estacionamienmto"{
+        assert.equals(2, estacionamiento.cantidadDeVehiculos())
+    }
+
+
+
+}
