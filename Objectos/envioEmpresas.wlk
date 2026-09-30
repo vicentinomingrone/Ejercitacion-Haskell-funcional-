@@ -6,6 +6,7 @@ class Envio {
     method costoBase() = peso * 100 + distancia * 10
 
     method costoTotal() = self.costoBase() + tipoDeEntrega.costoExtra(self)
+
     
 }
 
@@ -33,6 +34,16 @@ object entregaNormal {
 object entregaExpress {
     method costoExtra(envio) = 500 
 
+}
+
+object empresa {
+    var property envios = [envio1, envio2] 
+
+    method cantidadDeEnvios() = envios.size()
+
+    method enviosCaros() = envios.filter({ envio => envio.costoTotal() > 2000}) 
+
+    method costoTotal() = envios.map({envio => envio.costoTotal()}).sum()
 }
 
 // Instancias  de Envios 

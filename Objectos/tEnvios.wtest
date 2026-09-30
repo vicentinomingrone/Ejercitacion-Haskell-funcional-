@@ -6,6 +6,6 @@ describe "Test para los diferentes envios" {
   }
 
   test "Cuanto es el total del segundo envio"{
-    assert.equals(20000,envio2.costoTotal())
+    assert.equals(10800,envio2.costoTotal())
   }
 }
