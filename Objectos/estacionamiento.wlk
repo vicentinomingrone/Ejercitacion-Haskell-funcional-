@@ -66,11 +66,11 @@ object estacionamiento {
 
     method cantidadDeVehiculos() = vehiculos.size() 
 
-    method vehiculosQuePuedenViajar(kilometro){
+    method vehiculosQuePuedenViajar(kilometro)=
         vehiculos.filter({vehiculo => vehiculo.puedeViajar(kilometro) })
-    }
+    
 
     method kilometrosTotales() =
         vehiculos.map({ vehiculo => vehiculo.kilometros() }).sum()
-
+    
 }

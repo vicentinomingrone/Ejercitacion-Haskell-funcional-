@@ -1,0 +1,11 @@
+import envioEmpresas.*
+
+describe "Test para los diferentes envios" {
+  test "cuanto es el total del primer Envio" {
+    assert.equals(8010, envio1.costoTotal())
+  }
+
+  test "Cuanto es el total del segundo envio"{
+    assert.equals(20000,envio2.costoTotal())
+  }
+}

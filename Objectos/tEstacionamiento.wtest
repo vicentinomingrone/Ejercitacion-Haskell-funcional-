@@ -5,6 +5,12 @@ describe "Test de el Estacionamiento" {
         assert.equals(2, estacionamiento.cantidadDeVehiculos())
     }
 
+    test "cuantos vehiculos pueden viajar a 100km"{
+       assert.equals(2, estacionamiento.vehiculosQuePuedenViajar(100).size())
+    }
 
+    test "los kilometros totales del estacionamiento"{
+        assert.equals(91000, estacionamiento.kilometrosTotales())
+    }
 
 }

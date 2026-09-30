@@ -1,6 +1,4 @@
-import Objectos.tallerGame.*
 import taller.*
-
 describe "Tests de los Autos" {
   test "Hago viajar al golTrend a una distanacia posible" {
     assert.that(golTrend.puedeViajar(20))
