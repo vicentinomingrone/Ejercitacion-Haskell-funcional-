@@ -8,4 +8,17 @@ describe "Test para los diferentes envios" {
   test "Cuanto es el total del segundo envio"{
     assert.equals(10800,envio2.costoTotal())
   }
+
+  test "Hay 2 envios en esta empresa" {
+    assert.equals(2, empresa.cantidadDeEnvios())
+}
+
+test "El costo total de la empresa" {
+    assert.equals(18810, empresa.costoTotal())
+}
+
+  test "Cuantos envios caros tiene la empresa" {
+    assert.equals(2, empresa.enviosCaros().size())
+  }
+
 }

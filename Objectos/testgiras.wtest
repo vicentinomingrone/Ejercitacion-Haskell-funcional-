@@ -1,0 +1,11 @@
+import viajesymusica.*
+
+describe "Test de las Giras" {
+    test "El costo total de la gira de Coldplay" {
+       assert.equals(5000, giraColdPlay.costoTotal()) 
+    }
+
+    test "Costo total Gira Harry"{
+        assert.equals(53000, giraHarry.costoTotal())
+    }
+}
