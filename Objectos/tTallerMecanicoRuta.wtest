@@ -1,0 +1,37 @@
+import tallerMecanicoRuta9.*
+
+describe "Test para mi taller Mecanico"{
+    test "Cuantas Reparaciones Pendientes tiene el GolTrend"{
+        golTrend.agregarReparaciones(cambioAceite)
+        golTrend.agregarReparaciones(cambioDistribucion)
+        golTrend.agregarReparaciones(problemaAlternador)
+        assert.equals(3, golTrend.cuantasReparacionesTengo())
+    }
+
+    test "Agregar solo 1 reparacion"{
+        hilux.agregarReparaciones(cambioAceite)
+    }
+
+    test "Cuanto es el costo de las 3 reparaciones juntas"{
+        golTrend.agregarReparaciones(cambioAceite)
+        golTrend.agregarReparaciones(cambioDistribucion)
+        golTrend.agregarReparaciones(problemaAlternador)
+        assert.notEquals(40000, golTrend.costoTotal())
+    }
+
+    test "La Hilux necesita Revision"{
+        assert.that(hilux.necesitaRevision())
+    }
+
+    test "El Gol Esta baqueteado"{
+        assert.notThat(golTrend.estaBaqueteado())
+    }
+
+    test "Quiero las Reparciones Caras del GolTrend"{
+        golTrend.agregarReparaciones(cambioAceite)
+        golTrend.agregarReparaciones(cambioDistribucion)
+        golTrend.agregarReparaciones(problemaAlternador)
+        assert.equals(3, golTrend.susReparcionesCaras())
+    }
+
+}

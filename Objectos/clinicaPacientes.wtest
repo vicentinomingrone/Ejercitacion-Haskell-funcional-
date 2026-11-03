@@ -1,0 +1,27 @@
+import clinicaPaciente.*
+
+describe " Test para pacientes"{
+
+    test "Agregar Enfermedad"{
+        juan.agregarEnfermedad(gripe)
+        assert.equals(1, juan.cuantasEnfermedadesTengo())
+    }
+
+
+    test "hacer que pase un dia"{
+        juan.agregarEnfermedad(gripe)
+        juan.vivirUnDia()
+        assert.equals(85, juan.cuantaSalud())
+    }
+
+    test "Saber si con un dia de Infeccion ya esta Grave"{
+        juan.agregarEnfermedad(infeccion)
+        juan.vivirUnDia()
+        assert.notThat(juan.pacienteCritico())
+    }
+
+    test "Obtenemos las infecciones Raras"{
+        assert.equals(1, juan.infeccionesCaras())
+    }
+
+}
