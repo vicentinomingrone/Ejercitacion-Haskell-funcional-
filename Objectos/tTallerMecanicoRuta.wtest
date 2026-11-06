@@ -2,10 +2,10 @@ import tallerMecanicoRuta9.*
 
 describe "Test para mi taller Mecanico"{
     test "Cuantas Reparaciones Pendientes tiene el GolTrend"{
-        golTrend.agregarReparaciones(cambioAceite)
-        golTrend.agregarReparaciones(cambioDistribucion)
-        golTrend.agregarReparaciones(problemaAlternador)
-        assert.equals(3, golTrend.cuantasReparacionesTengo())
+        bmw.agregarReparaciones(cambioAceite)
+        bmw.agregarReparaciones(cambioDistribucion)
+        bmw.agregarReparaciones(problemaAlternador)
+        assert.equals(3, bmw.cuantasReparacionesTengo())
     }
 
     test "Agregar solo 1 reparacion"{
@@ -13,10 +13,10 @@ describe "Test para mi taller Mecanico"{
     }
 
     test "Cuanto es el costo de las 3 reparaciones juntas"{
-        golTrend.agregarReparaciones(cambioAceite)
-        golTrend.agregarReparaciones(cambioDistribucion)
-        golTrend.agregarReparaciones(problemaAlternador)
-        assert.notEquals(40000, golTrend.costoTotal())
+        bmw.agregarReparaciones(cambioAceite)
+        bmw.agregarReparaciones(problemaAlternador)
+        bmw.agregarReparaciones(cambioDistribucion)
+        assert.notEquals(40000, bmw.costoTotal())
     }
 
     test "La Hilux necesita Revision"{
@@ -24,14 +24,14 @@ describe "Test para mi taller Mecanico"{
     }
 
     test "El Gol Esta baqueteado"{
-        assert.notThat(golTrend.estaBaqueteado())
+        assert.notThat(bmw.estaBaqueteado())
     }
 
     test "Quiero las Reparciones Caras del GolTrend"{
-        golTrend.agregarReparaciones(cambioAceite)
-        golTrend.agregarReparaciones(cambioDistribucion)
-        golTrend.agregarReparaciones(problemaAlternador)
-        assert.equals(3, golTrend.susReparcionesCaras())
+        bmw.agregarReparaciones(cambioAceite)
+        bmw.agregarReparaciones(cambioDistribucion)
+        bmw.agregarReparaciones(problemaAlternador)
+        assert.equals(1, bmw.susReparcionesCaras().size())
     }
 
 }
