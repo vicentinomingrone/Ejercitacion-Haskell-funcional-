@@ -90,3 +90,18 @@ class Ballestero inherits Arquero{
 
     override method destreza() = super() * 2
 }
+
+
+
+object bonus {
+    method modificarCopas(copas, cantidadParticipantes) =
+        copas + cantidadParticipantes
+}
+
+
+class Boost {
+    const multiplicador
+
+    method modificarCopas(copasEnJuego) =
+        copasEnJuego * multiplicador
+}
