@@ -1,0 +1,66 @@
+import modeloParcial.*
+
+describe "test para el modelo de parcial" {
+test "Cambiar de capitan a Obrero" {
+    const tripulante = new Tripulante(
+        rolActual = libre,
+        edad = 19,
+        fuerza = 70
+    )
+
+    tripulante.cambiarRol(obrero)
+
+    assert.equals(obrero, tripulante.rolActual())
+}
+
+test "no puede cambiar a obrero si es menor de edad" {
+    const tripulante = new Tripulante(
+        rolActual = libre,
+        edad = 17,
+        fuerza = 80
+    )
+
+    assert.notThat(tripulante.podesCambiarA(obrero))
+}
+
+
+}
+
+describe "Tests para cambiar a Capitan" {
+
+    test "puede cambiar a Capitan si cumple todos los requisitos" {
+        const rolCapitan = new Capitan(conocimiento = 200)
+
+        const tripulante = new Tripulante(
+            rolActual = libre,
+            edad = 30,
+            fuerza = 80
+        )
+
+        assert.that(tripulante.podesCambiarA(rolCapitan))
+    }
+
+    test "no puede cambiar a Capitan si no tiene suficiente fuerza" {
+        const rolCapitan = new Capitan(conocimiento = 200)
+
+        const tripulante = new Tripulante(
+            rolActual = libre,
+            edad = 30,
+            fuerza = 70
+        )
+
+        assert.notThat(tripulante.podesCambiarA(rolCapitan))
+    }
+
+    test "no puede cambiar a Capitan si no tiene suficiente conocimiento" {
+        const rolCapitan = new Capitan(conocimiento = 10)
+
+        const tripulante = new Tripulante(
+            rolActual = libre,
+            edad = 30,
+            fuerza = 80
+        )
+
+        assert.notThat(tripulante.podesCambiarA(rolCapitan))
+    }
+}
