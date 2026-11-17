@@ -1,166 +1,158 @@
 class Filosofo{
-    const nombre 
+    const nombre
     var edadEnDias
+    const actividades 
+    const honorificos
     var nivelDeIluminacion
-    const actividades = []
-    const honorificos = []
 
-    method agregar(honorifico){
-        if(honorificos.contains(honorifico)){
-           throw new Exception(message = "no se puede agregar duplicado")
-        }
-        honorificos.add(honorifico)
-    }
-
-    method nivelDeIluminacion() = nivelDeIluminacion
-
-    method presentarse() = honorificos.join(", ") + ", " + nombre
-
-    method estaCorrecto() = nivelDeIluminacion > 1000
-
-    method disminuirIluminacion(cantidad) {
-        nivelDeIluminacion -= cantidad
-    }
-
-    method aumentarIluminacion(cantidad){
-        nivelDeIluminacion += cantidad
-    }
-
-    method rejuvenecer(cantidad){
-        edadEnDias -= cantidad
-    } 
-
-    method envejecer(cantidad){
-        edadEnDias += cantidad
-    }
-    method vivirUnDia(){
-        actividades.forEach({actividad => actividad.hacer(self)})
-        self.envejecer(1)
-    }
-    method cumplirAnio(){
-        if(edadEnDias%365 == 0){
-            self.aumentarIluminacion(10)
+    method nivelDeIluminacion()=nivelDeIluminacion
+    method agregarHonorifico(honorifico){
+        if(not honorificos.contains(honorifico))
+        {
+            honorificos.add(honorifico)
         }
     }
+    method presentarse()=  honorificos.join(",")+ " "+nombre
 
-    method cumplirSesenta(){
-        if(edadEnDias == 21900){
-            self.agregar("EL Sabio")
-        }
+    method estaEnLoCorrecto() = nivelDeIluminacion > 1000
+   method agregarActividad(actividad){
+    actividades.add(actividad)
+   }
+   method realizarActividades(){
+    actividades.forEach({actividad => actividad.hacer(self)})
+   }
+   method aumentarIluminacion(cantidad){
+    nivelDeIluminacion+=cantidad
+   } 
+   method disminuirIluminacion(cantidad){
+    nivelDeIluminacion-=cantidad
+   }
+   method rejuvenecer(cantidad){
+    edadEnDias-=cantidad
+   }
+   method envejecer(cantidad){
+    edadEnDias+=cantidad
+   }
+
+   method cumplirAnios()= edadEnDias%365==0
+   method aumentarPorCumpleanios(){
+    if(self.cumplirAnios()){
+        self.aumentarIluminacion(10)
     }
-}
+    if(edadEnDias == 21900)
+    {
+        self.agregarHonorifico("el sabio")
+    }
+   }
 
-class Actividad{
-
-
-    method hacer(filosofo)
+   method vivirDia(){
+    self.realizarActividades()
+    self.envejecer(1)
+    self.aumentarPorCumpleanios()
+   }
     
 }
+class FilosofoContemporaneo inherits Filosofo{
 
+    override method presentarse() = "hola"
+    override method nivelDeIluminacion(){
+        if(self.amaAdmirarPaisaje())
+        {
+            return super()*5
+        }
+        return super()
+    }
+    method amaAdmirarPaisaje()= actividades.contains(admirarPaisaje)
+}
 object tomarVino{
 
     method hacer(filosofo) {
         filosofo.disminuirIluminacion(10)
-        filosofo.agregar("El Borracho")
+        filosofo.agregarHonorifico("el borracho")
     }
 }
 
-class JuntarseAgora{
-    const otroFilosofo
+class JuntarseEnElAgora{
+    const filosofo2
 
     method hacer(filosofo){
-        filosofo.aumentarIluminacion(otroFilosofo.nivelDeIluminacion() * 0.1)
-    }   
+        filosofo.aumentarIluminacion(filosofo2.nivelDeIluminacion() * 0.1)
+    }    
+}
+object admirarPaisaje{
+    method hacer(filosfo){}
 }
 
-object admirarpaisaje{
-    method hacer(filosofo){
-
-    }
-}
-
-class MeditarEnCascada{
-    const metrosDeCascada
-
+class MeditarBakjoUnaCascada{
+    const metros
     method hacer(filosofo) {
-        filosofo.aumentarIluminacion(metrosDeCascada* 10)
+        filosofo.aumentarIluminacion(10*metros)
+    } 
+}
+class PracticarDeporte{
+    const tipo
+
+    method hacer(filosofo){
+        filosofo.rejuvenecer(tipo.hacerDeporte(filosofo))
     }
 }
 
-
-class Deportes inherits Actividad {
-    const deporte
-
-    override method hacer(filosofo) {
-        filosofo.rejuvenecer(deporte.diasQueRejuvenece())
-    }
+object futbol{
+    method hacerDeporte(filosofo)=1
+}
+object polo{
+    method hacerDeporte(filosofo)=2
 }
 
-object futbol {
-    method diasQueRejuvenece() = 1
+object waterpolo{
+    method hacerDeporte(filosofo)=polo.hacerDeporte(filosofo) *2
 }
 
-object polo {
-    method diasQueRejuvenece() = 2
-}
-
-object waterPolo {
-    method diasQueRejuvenece() = polo.diasQueRejuvenece() * 2
-}
 
 
 class Argumento{
-    const descripcion 
-    const naturaleza    
+    const descripcion
+    const naturaleza
 
-    method esEnriquecedora() = naturaleza.esEnriquecedora(descripcion)
+    method esEnriquecedor() = naturaleza.esEnriquecedor(self)
+    method descripcion()=descripcion
+}
+object estoica{
+    method esEnriquecedor(argumento)=true
+}
+object moralista{
+    method esEnriquecedor(argumento)= argumento.descripcion().words().size() >=10
+}
+object esceptica{
+    method esEnriquecedor(argumento)= argumento.descripcion().last()=="?"
 }
 
-object estoica {
-    method esEnriquecedora(descripcion) = true
+object cinica{
+    method esEnriquecedor(argumento) = 1.randomUpTo(100) <= 30
 }
+class ArgumentoMixto {
+    const descripcion
+    const naturalezas
 
-object moralista {
-    method esEnriquecedora(descripcion) =
-        descripcion.words().size() >= 10
+    method esEnriquecedor() = naturalezas.all({naturaleza=> naturaleza.esEnriquecedor(self)})
+
 }
-
-object esceptica {
-    method esEnriquecedora(descripcion) =
-        descripcion.endsWith("?")
-}
-
-object cinica {
-    method esEnriquecedora(descripcion) =
-        1.randomUpTo(10) <= 3
-}
-
-class Combinadas {
-    const naturalezas = []
-
-    method esEnriquecedora(descripcion) = naturalezas.all({ naturaleza => naturaleza.esEnriquecedora(descripcion) })
-}
-
 class Partido{
-    const filosofo 
-    const argumentos = []
+    const filosofo
+    const argumentos
 
-    method agergarArgumentos(argumento) {
+    method agregarArgumento(argumento){
         argumentos.add(argumento)
     }
+    method argumentos()=argumentos
+    
+    
 }
+class Discusion{
+    
+    const partido1
+    const partido2
 
-class Discusion {
-    const partidos = []
-
-    method esBuena() {
-        const todosLosArgumentos =
-            partidos.flatMap({ partido => partido.argumentos() })
-
-        const enriquecedores =
-            todosLosArgumentos.filter({ argumento => argumento.esEnriquecedora() })
-
-        return enriquecedores.size() >= todosLosArgumentos.size() * 0.5
-            && partidos.all({ partido => partido.filosofo().estaCorrecto() })
-    }
-} 
+    method discusionBuena() = self.argumentosTotal().count({argumento => argumento.esEnriquecedor()}) >= self.argumentosTotal().size()/2
+    method argumentosTotal() = partido1.argumentos() + partido2.argumentos()
+}
