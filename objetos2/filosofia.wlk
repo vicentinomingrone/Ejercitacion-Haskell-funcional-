@@ -2,7 +2,7 @@ class Filosofo{
     const nombre
     var edadEnDias
     const actividades 
-    const honorificos
+    const honorificos 
     var nivelDeIluminacion
 
     method nivelDeIluminacion()=nivelDeIluminacion
